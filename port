@@ -1,0 +1,288 @@
+vim.g.mapleader = ' '
+vim.o.wrap = true
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.indentexpr = "autoindent"
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.incsearch = false
+vim.o.breakindent = true
+vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+vim.cmd([[au FocusLost * :wa]])
+vim.api.nvim_set_keymap('n', '<C-;>', 'f"', { noremap = true })
+vim.api.nvim_set_keymap('n', '0', '_', { noremap = true })
+vim.api.nvim_set_keymap('v', '0', '_', { noremap = true })
+vim.api.nvim_set_keymap('n', '4', '$', { noremap = true })
+vim.api.nvim_set_keymap('v', '4', '$h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-9>', 'vi(', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-{>', 'vi{', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-[>', 'vi[', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-9>', 'f(ci(', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>9', 'vi(', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-\'>', 'f"ci"', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>\'', 'vi"', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-[>', 'f{ci{', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>[', 'vi{', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-]>', 'f[ci[', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>]', 'vi[', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>\'', 'f{li<CR><Esc>ko<Tab>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>\\', 'f(li<CR><Esc>ko<Tab>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-w>', 'mAggvG=i<Esc>\'A', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>n', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-a>', '\'A', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<D-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<D-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'kj', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>a', '<C-^>', { noremap = true, silent = true })
+-- Mapeo para pegar desde el registro "0 con la tecla F1 en modo normal
+--
+vim.api.nvim_set_keymap('n', '<F1>', '"0p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F2>', '"1p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F3>', '"2p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F4>', '"3p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F5>', '"4p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F6>', ':DBUIToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F7>', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>o', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<F6>', ':s/\\%V //g<CR>', { noremap = true, silent = true })
+local low = function(i) return string.char(97 + i) end
+local upp = function(i) return string.char(65 + i) end
+for i = 0, 25 do vim.keymap.set("n", "m" .. low(i), "m" .. upp(i)) end
+for i = 0, 25 do vim.keymap.set("n", "m" .. upp(i), "m" .. low(i)) end
+for i = 0, 25 do vim.keymap.set("n", "'" .. low(i), "'" .. upp(i)) end
+for i = 0, 25 do vim.keymap.set("n", "'" .. upp(i), "'" .. low(i)) end
+
+lvim.regexpengine = 1
+
+lvim.plugins = {
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
+  { 'kepano/flexoki-neovim',    name = 'flexoki' },
+  {
+    "yorickpeterse/nvim-window",
+    keys = {
+      { "<leader>jj", "<cmd>lua require('nvim-window').pick()<cr>", desc = "nvim-window: Jump to window" },
+    },
+    config = true,
+  },
+  "kristijanhusak/vim-dadbod-ui",
+  "tpope/vim-dadbod",
+  {
+    "kristijanhusak/vim-dadbod-completion",
+    event = 'VeryLazy',
+    config = function()
+      local function db_completion()
+        require("cmp").setup.buffer { sources = { { name = "vim-dadbod-completion" } } }
+      end
+      vim.g.db_ui_save_location = vim.fn.stdpath "config" .. require("plenary.path").path.sep .. "db_ui"
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "sql",
+        },
+        command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "sql",
+          "mysql",
+          "plsql",
+        },
+        callback = function()
+          vim.schedule(db_completion)
+        end,
+      })
+    end
+  },
+  {
+    "kawre/neotab.nvim",
+    event = "InsertEnter",
+    opts = {
+      -- configuration goes here
+    },
+  },
+  "sainnhe/gruvbox-material",
+  "morhetz/gruvbox",
+  "zefei/vim-colortuner",
+  "luochen1990/rainbow",
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = ... },
+  "lunarvim/horizon.nvim",
+  "nyngwang/nvimgelion",
+  "Mofiqul/dracula.nvim",
+  "catppuccin/nvim",
+  {
+    'folke/zen-mode.nvim',
+    event = 'VeryLazy',
+    opts = {
+      window = {
+        backdrop = 0.96,        -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+        width = 80,             -- width of the Zen window
+        height = 1,             -- height of the Zen window
+        options = {
+          signcolumn = "no",    -- disable signcolumn
+          cursorcolumn = false, -- disable cursor column
+        }
+      },
+      plugins = {
+        options = {
+          enabled = true,
+          ruler = true,    -- disables the ruler text in the cmd line area
+          showcmd = false, -- disables the command in the last line of the screen
+          laststatus = 0,  -- turn off the statusline in zen mode
+        }
+      }
+    }
+  },
+  {
+    "ggandor/leap.nvim",
+    event = 'VeryLazy',
+    config = function()
+      require('leap').add_default_mappings()
+    end
+  },
+  {
+    'barrett-ruth/live-server.nvim',
+    build = 'yarn global add live-server',
+    config = true
+  },
+  {
+    'ThePrimeagen/harpoon',
+    event = 'VeryLazy',
+    config = function()
+      local mark = require("harpoon.mark")
+      local ui = require("harpoon.ui")
+
+      vim.keymap.set("n", "<leader>t", mark.add_file)
+      vim.keymap.set("n", "<leader>m", ui.toggle_quick_menu)
+
+      vim.keymap.set("n", "<leader>1", function() ui.nav_file(1) end)
+      vim.keymap.set("n", "<leader>2", function() ui.nav_file(2) end)
+      vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end)
+      vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
+    end
+  },
+  { 'mhartington/formatter.nvim' },
+  'marko-cerovac/material.nvim',
+  {
+    'nvim-java/nvim-java',
+    dependencies = {
+      'nvim-java/lua-async-await',
+      'nvim-java/nvim-java-core',
+      'nvim-java/nvim-java-test',
+      'nvim-java/nvim-java-dap',
+      'MunifTanjim/nui.nvim',
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          registries = {
+            'github:nvim-java/mason-registry',
+            'github:mason-org/mason-registry',
+          },
+        },
+      }
+    },
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+}
+
+lvim.colorscheme = 'horizon'
+lvim.lsp.on_attach_callback = function(client, _)
+  client.server_capabilities.semanticTokensProvider = nil
+end
+
+local capabilities = require("lvim.lsp").common_capabilities()
+require("lvim.lsp.manager").setup("htmx", {
+  on_attach = require("lvim.lsp").common_on_attach,
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = capabilities,
+})
+
+require("lvim.lsp.manager").setup("html", {
+  on_attach = require("lvim.lsp").common_on_attach,
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = capabilities,
+})
+
+require('luasnip').filetype_extend("javascript", { "javascriptreact" })
+require('luasnip').filetype_extend("javascript", { "html" })
+require('luasnip').filetype_extend("php", { "html" })
+require('luasnip').filetype_extend("templ", { "html" })
+require('luasnip').filetype_extend("javascriptreact", { "html" })
+require('luasnip').filetype_extend("html", { "template" })
+require("luasnip/loaders/from_vscode").lazy_load()
+
+-- vim.cmd("autocmd BufNewFile,BufRead *.tmpl setfiletype html")
+vim.cmd("autocmd BufNewFile,BufRead *.templ setfiletype go")
+vim.cmd("autocmd BufNewFile,BufRead *.blade.php setfiletype html")
+
+function Err_nil()
+  vim.api.nvim_put({ "if err != nil {}" }, "c", true, true)
+end
+
+-- Asigna la función a una combinación de teclas (puedes cambiarlo según tus preferencias)
+lvim.format_on_save.enabled = true
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    command = "prettier",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  },
+  {
+    command = "black",
+    filetypes = { "python" }
+  }
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "eslint", filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" } }
+}
+
+local cmp = require 'cmp'
+cmp.setup({
+  mapping =
+  {
+    ['<S-j>'] = cmp.mapping.select_next_item(),
+    ['<S-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<Tab>'] = cmp.mapping.confirm({
+      select = true,
+    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({
+      select = true,
+    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['\''] = cmp.mapping.confirm({
+      select = true,
+    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }
+})
+vim.g.loaded_matchparen = 1
+vim.g.regexpengine = 1
+vim.regexpengine = 1

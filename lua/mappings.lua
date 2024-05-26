@@ -10,6 +10,7 @@ map("i", "kj", "<ESC>")
 map("v", "kj", "<ESC>")
 map("n", "<Leader>a", "<C-^>")
 map("n", "<leader>w", ":w<CR>")
+map("n", "<leader>fn", ":e %:h/")
 
 
 -- Mapeo para mover el cursor al inicio de la línea sin cambiar la columna
@@ -42,7 +43,7 @@ map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 
 -- Mapeos para comandos específicos
 -- map('n', '<leader>w', ':GoImports<CR>', { noremap = true, silent = true })
-map('n', '<C-w>', 'mAggvG=i<Esc>\'A', { noremap = true, silent = true })
+-- map('n', '<C-w>', 'mAggvG=i<Esc>\'A', { noremap = true, silent = true })
 map('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })
 map('n', '<leader>n', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 map('i', '<C-;>', 'System.out.println();<Esc>hi', { noremap = true, silent = true })
@@ -51,9 +52,9 @@ map('i', '<D-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
 map('i', '<C-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
 map('n', '<C-;>', 'mA:Telescope lsp_definitions<CR>', { noremap = true, silent = true })
 map('i', '<D-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
-  { noremap = true, silent = true })
+    { noremap = true, silent = true })
 map('i', '<C-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
-  { noremap = true, silent = true })
+    { noremap = true, silent = true })
 map('i', 'kj', '<Esc>', { noremap = true, silent = true })
 map('v', 'kj', '<Esc>', { noremap = true, silent = true })
 map('n', '<Leader>a', '<C-^>', { noremap = true, silent = true })
@@ -69,10 +70,11 @@ map('n', '<F5>', '"4p', { noremap = true, silent = true })
 map('n', '<F6>', ':DBUIToggle<CR>', { noremap = true, silent = true })
 map('n', '<F7>', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
 map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
-map('n', '<leader>r', ':w<CR>:term go run % <CR>', { noremap = true, silent = true })
+-- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
+map('n', '<leader>r', ':w<CR>:term go run main.go <CR>', { noremap = true, silent = true })
 map('n', '<leader>b',
-  ':w<CR>:term ./your_server.sh<CR>',
-  { noremap = true, silent = true })
+    ':w<CR>:term ./your_server.sh<CR>',
+    { noremap = true, silent = true })
 
 -- Mapeos para el historial del clipboard
 
@@ -97,20 +99,22 @@ map("i", "<C-i>", "í", { noremap = true, silent = true })
 map("i", "<C-g>", "ó", { noremap = true, silent = true })
 map("i", "<C-u>", "ú", { noremap = true, silent = true })
 
+-- map("n", "gl", vim.lsp.diagnostic.show_line_diagnostics, { noremap = true, silent = true })
+
 -- Cerrar buffer actual
 map('n', '<C-,>', ':bd<CR>', { noremap = true })
 
 -- Abrir y cerrar el explorador
-map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
+-- map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
 map('v', '<', '<gv', { noremap = true })
 map('v', '>', '>gv', { noremap = true })
 map({ "n", "t" }, "<leader>'", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+    require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 end, { desc = "Terminal Toggle Floating term" })
-map({ "n", "t" }, "<C-n>", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-end, { desc = "Terminal Toggle Floating term" })
+-- map({ "n", "t" }, "<C-n>", function()
+--     require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+-- end, { desc = "Terminal Toggle Floating term" })
 
 map("n", "<leader>q", function()
-  require("nvchad.tabufline").close_buffer()
+    require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })

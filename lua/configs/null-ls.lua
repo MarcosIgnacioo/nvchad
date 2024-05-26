@@ -14,10 +14,10 @@ null_ls.setup({
 formatters.setup {
   {
     command = "prettier",
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json" },
   },
   {
     command = "black",
     filetypes = { "python" }
-  }
+  },
 }

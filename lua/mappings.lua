@@ -52,9 +52,9 @@ map('i', '<D-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
 map('i', '<C-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
 map('n', '<C-;>', 'mA:Telescope lsp_definitions<CR>', { noremap = true, silent = true })
 map('i', '<D-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
-    { noremap = true, silent = true })
+ { noremap = true, silent = true })
 map('i', '<C-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
-    { noremap = true, silent = true })
+ { noremap = true, silent = true })
 map('i', 'kj', '<Esc>', { noremap = true, silent = true })
 map('v', 'kj', '<Esc>', { noremap = true, silent = true })
 map('n', '<Leader>a', '<C-^>', { noremap = true, silent = true })
@@ -73,8 +73,8 @@ map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, sil
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
 map('n', '<leader>r', ':w<CR>:term go run main.go <CR>', { noremap = true, silent = true })
 map('n', '<leader>b',
-    ':w<CR>:term ./your_server.sh<CR>',
-    { noremap = true, silent = true })
+ ':w<CR>:term ./your_server.sh<CR>',
+ { noremap = true, silent = true })
 
 -- Mapeos para el historial del clipboard
 
@@ -109,12 +109,20 @@ map('n', '<C-,>', ':bd<CR>', { noremap = true })
 map('v', '<', '<gv', { noremap = true })
 map('v', '>', '>gv', { noremap = true })
 map({ "n", "t" }, "<leader>'", function()
-    require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+ require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 end, { desc = "Terminal Toggle Floating term" })
 -- map({ "n", "t" }, "<C-n>", function()
 --     require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 -- end, { desc = "Terminal Toggle Floating term" })
 
 map("n", "<leader>q", function()
-    require("nvchad.tabufline").close_buffer()
+ require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })
+
+map("n", "<S-l>", function()
+ require("nvchad.tabufline").next()
+end, { desc = "Buffer Goto next" })
+
+map("n", "<S-h>", function()
+ require("nvchad.tabufline").prev()
+end, { desc = "Buffer Goto prev" })

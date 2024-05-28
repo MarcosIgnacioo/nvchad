@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-    theme = "gruvchad",
+    theme = "gruvbox",
     hl_override = {
         -- Type = { fg = "#ffccdf" },
         -- ["@type"] = { fg = "#ffccdf" },

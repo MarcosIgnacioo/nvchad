@@ -97,5 +97,6 @@ return {
   config = function()
    require "configs.leap"
   end,
- }
+ },
+ "nvim-pack/nvim-spectre"
 }

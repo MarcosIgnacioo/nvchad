@@ -49,4 +49,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   vim.cmd("write")
  end,
 })
+
 vim.o.laststatus = 3

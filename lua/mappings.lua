@@ -71,7 +71,7 @@ map('n', '<F6>', ':DBUIToggle<CR>', { noremap = true, silent = true })
 map('n', '<F7>', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
 map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
-map('n', '<leader>r', ':w<CR>:term go run main.go <CR>', { noremap = true, silent = true })
+map('n', '<leader>ru', ':w<CR>:term go run main.go <CR>', { noremap = true, silent = true })
 map('n', '<leader>b',
  ':w<CR>:term ./your_server.sh<CR>',
  { noremap = true, silent = true })
@@ -119,10 +119,28 @@ map("n", "<leader>q", function()
  require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })
 
-map("n", "<S-l>", function()
+
+map("n", "<C-j>", function()
+ require("nvchad.tabufline").prev()
+end, { desc = "Buffer Goto prev" })
+
+map("n", "<C-k>", function()
  require("nvchad.tabufline").next()
 end, { desc = "Buffer Goto next" })
 
-map("n", "<S-h>", function()
- require("nvchad.tabufline").prev()
-end, { desc = "Buffer Goto prev" })
+-- quick fix list prev and next
+vim.keymap.set("n", "<leader>;", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
+vim.keymap.set("n", "<leader>h", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
+
+vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+ desc = "Toggle Spectre"
+})
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+ desc = "Search current word"
+})
+vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+ desc = "Search current word"
+})
+vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+ desc = "Search on current file"
+})

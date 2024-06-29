@@ -38,7 +38,7 @@ return {
   opts = {
    window = {
     backdrop = 0.96,       -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-    width = 90,            -- width of the Zen window
+    width = 75,            -- width of the Zen window
     height = 1,            -- height of the Zen window
     options = {
      signcolumn = "no",    -- disable signcolumn
@@ -98,5 +98,12 @@ return {
    require "configs.leap"
   end,
  },
- "nvim-pack/nvim-spectre"
+ "nvim-pack/nvim-spectre",
+ {
+  "NStefan002/donut.nvim",
+  event = 'VeryLazy',
+ },
+ "tpope/vim-dadbod",
+ "kristijanhusak/vim-dadbod-completion",
+ "kristijanhusak/vim-dadbod-ui",
 }

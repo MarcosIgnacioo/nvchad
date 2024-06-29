@@ -1,6 +1,7 @@
 local luasnip = require('luasnip')
 luasnip.filetype_extend("javascript", { "javascriptreact" })
 luasnip.filetype_extend("javascript", { "html" })
+luasnip.filetype_extend("markdown", { "html" })
 luasnip.filetype_extend("php", { "html" })
 luasnip.filetype_extend("templ", { "html" })
 luasnip.filetype_extend("javascriptreact", { "html" })

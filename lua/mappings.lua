@@ -3,19 +3,26 @@ require "nvchad.mappings"
 
 -- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 -- vim.cmd([[au FocusLost * :wa]])
-
+-- aaa
 local map = vim.keymap.set
 map("n", "<C-t>", "<M-i>", { desc = "Terminal" })
 map("i", "kj", "<ESC>")
 map("v", "kj", "<ESC>")
 map("n", "<Leader>a", "<C-^>")
+map("v", "L", ":s/\\(.*\\)/\\1")
+map("n", "<Leader>c", "o```c```<Esc>0fca<CR><Esc><S-o><Esc>p")
+map("i", "<C-c>", "```c```<Esc>0fca<CR><Esc><S-o><Esc>p")
+map("n", "<Leader>f[", "f{V%")
+map("n", "<Leader>f]", "f}V%")
 map("n", "<leader>w", ":w<CR>")
 map("n", "<leader>fn", ":e %:h/")
-
-
 -- Mapeo para mover el cursor al inicio de la línea sin cambiar la columna
 map('n', '0', '_', { noremap = true })
+map('n', '9', '_', { noremap = true })
+map('n', '<leader>b', '_', { noremap = true })
+map('v', '<leader>b', '_', { noremap = true })
 map('v', '0', '_', { noremap = true })
+map('v', '9', '_', { noremap = true })
 
 -- Mapeo para mover el cursor al final de la línea sin cambiar la columna
 map('n', '4', '$', { noremap = true })
@@ -47,7 +54,7 @@ map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 map('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })
 map('n', '<leader>n', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 map('i', '<C-;>', 'System.out.println();<Esc>hi', { noremap = true, silent = true })
-map('n', '<leader>v', ':GoImports<CR>:w<CR>', { noremap = true, silent = true })
+map('n', '<leader>v', ':GoImports<CR>', { noremap = true, silent = true })
 map('i', '<D-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
 map('i', '<C-,>', [[fmt.Println()<Esc>ha]], { noremap = true, silent = true })
 map('n', '<C-;>', 'mA:Telescope lsp_definitions<CR>', { noremap = true, silent = true })
@@ -68,14 +75,11 @@ map('n', '<F5>', '"4p', { noremap = true, silent = true })
 
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
 map('n', '<F6>', ':DBUIToggle<CR>', { noremap = true, silent = true })
-map('n', '<F7>', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
+map('n', '<F7>', ':w<CR>:!gcc % -lm && ./a.out <CR>', { noremap = true, silent = true })
+map('n', '<leader>r', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
 map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
 map('n', '<leader>ru', ':w<CR>:term go run main.go <CR>', { noremap = true, silent = true })
-map('n', '<leader>b',
- ':w<CR>:term ./your_server.sh<CR>',
- { noremap = true, silent = true })
-
 -- Mapeos para el historial del clipboard
 
 map("n", "<F1>", '"0p', { noremap = true, silent = true })
@@ -93,16 +97,10 @@ for i = 0, 25 do vim.keymap.set("n", "m" .. upp(i), "m" .. low(i)) end
 for i = 0, 25 do vim.keymap.set("n", "'" .. low(i), "'" .. upp(i)) end
 for i = 0, 25 do vim.keymap.set("n", "'" .. upp(i), "'" .. low(i)) end
 
-map("i", "<C-a>", "á", { noremap = true, silent = true })
-map("i", "<C-e>", "é", { noremap = true, silent = true })
-map("i", "<C-i>", "í", { noremap = true, silent = true })
-map("i", "<C-g>", "ó", { noremap = true, silent = true })
-map("i", "<C-u>", "ú", { noremap = true, silent = true })
-
 -- map("n", "gl", vim.lsp.diagnostic.show_line_diagnostics, { noremap = true, silent = true })
 
 -- Cerrar buffer actual
-map('n', '<C-,>', ':bd<CR>', { noremap = true })
+-- map('n', '<C-,>', ':bd<CR>', { noremap = true })
 
 -- Abrir y cerrar el explorador
 -- map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
@@ -120,13 +118,21 @@ map("n", "<leader>q", function()
 end, { desc = "Buffer Close" })
 
 
-map("n", "<C-j>", function()
+map("n", "<D-j>", function()
  require("nvchad.tabufline").prev()
 end, { desc = "Buffer Goto prev" })
 
-map("n", "<C-k>", function()
+map("n", "<D-k>", function()
  require("nvchad.tabufline").next()
 end, { desc = "Buffer Goto next" })
+
+map("i", "<D-k>", function()
+ require("nvchad.tabufline").next()
+end, { desc = "Buffer Goto next" })
+
+map("i", "<D-j>", function()
+ require("nvchad.tabufline").prev()
+end, { desc = "Buffer Goto prev" })
 
 -- quick fix list prev and next
 vim.keymap.set("n", "<leader>;", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
@@ -144,3 +150,21 @@ vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual(
 vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
  desc = "Search on current file"
 })
+
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+
+vim.keymap.set("n", "<C-,>", [[<cmd>vertical resize +5<cr>]])
+vim.keymap.set("n", "<C-.>", [[<cmd>vertical resize -5<cr>]])
+
+vim.keymap.set("i", "<C-a>", "á", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-e>", "é", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-i>", "í", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-o>", "ó", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-u>", "ú", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-n>", "ñ", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-=>", "¿", { noremap = true, silent = true })
+vim.keymap.set("i", "<D-1>", "¡", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', '/', "\"fy/\\V<C-R>f<CR>")

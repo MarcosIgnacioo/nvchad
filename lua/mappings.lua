@@ -4,23 +4,71 @@ require "nvchad.mappings"
 -- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 -- vim.cmd([[au FocusLost * :wa]])
 -- aaa
+
 local map = vim.keymap.set
+map("i", "<Esc>", "<Esc>", { desc = "" })
+map("n", "W", "viW", { desc = "" })
+map("n", "K", ":lua vim.lsp.buf.hover()<CR>", { desc = "" })
+map("n", "dB", "dbcl", { desc = "" })
+map("n", "f[", "f{", { desc = "" })
+map("n", "f{", "f[", { desc = "" })
+map("n", "p", "pvby", { desc = "" })
+map("v", "p", "pvby", { desc = "" })
+map("n", "P", "p", { desc = "" })
+map("v", "P", "p", { desc = "" })
 map("n", "<C-t>", "<M-i>", { desc = "Terminal" })
+map("n", "<C-,>", "printf(\"% \n\",);<Esc>0f%a", { desc = "Terminal" })
+map("i", "<C-,>", "printf(\"% \\n\",);<Esc>0f%a", { desc = "Terminal" })
+map("v", "<C-,>", "yoprintf(\"% \\n\",<Esc>pa);<Esc>0f%a", { desc = "Terminal" })
 map("i", "kj", "<ESC>")
+map("i", "<C-q>", "=")
+map("i", "<D-'>", "=")
+map("v", "F",
+  "yo<Esc>oif (<Esc>pa == NULL) <Esc>A{}<Esc>hhf{ci{<CR><Esc><S-o>printf(\"<Esc>pa is NULL\\n\");<CR>return NULL;<Esc>jf}o")
 map("i", "<C-->", "_")
+map("n", "dW", "ciW")
+map("n", "D", "ciW")
+map("n", "<C-'>", "f\"ci\"")
+map("n", "L", "A")
+map("n", "dl", "d$a")
 map("i", "<C-[>", "<")
+map("n", "<D-[>", "ci{<CR><Esc><S-o>")
 map("i", "<C-]>", ">")
 map("i", "<C-0>", "_")
-map("i", "<C-'>", "-")
-map('i', '<C-,>', '<', { noremap = true, silent = true })
-map('i', '<C-.>', '>', { noremap = true, silent = true })
+map("n", "<leader>s", "v$hd")
+map("n", "<leader>g", ":vsplit<CR>")
+map("i", "<C-'>", "_")
+-- map('i', '<C-,>', '<', { noremap = true, silent = true })
+-- map('i', '<C-.>', '>', { noremap = true, silent = true })
 map('i', '<C-;>', '_', { noremap = true, silent = true })
 map("v", "kj", "<ESC>")
 map("v", "5", "%")
 map("n", "<Leader>a", "<C-^>")
 --kirby
 map("v", "L", ":s/\\(.*\\)/\\1")
-map("n", "<Leader>c", "o```c```<Esc>0fca<CR><Esc><S-o><Esc>p")
+-- map("n", "<Leader>c", "o```c```<Esc>0fca<CR><Esc><S-o><Esc>p")
+map("n", "<Leader>c'", "vi\"y")
+map("n", "<Leader>c[", "vi{y")
+map("n", "<Leader>c]", "vi]y")
+map("n", "<Leader>c9", "vi(y")
+map("n", "<Leader>c0", "vi(y")
+
+map("n", "<Leader>v'", "vi\"<Esc>p")
+map("n", "<Leader>v[", "vi{<Esc>p")
+map("n", "<Leader>v]", "vi]<Esc>p")
+map("n", "<Leader>v9", "vi(<Esc>p")
+map("n", "<Leader>v0", "vi(<Esc>p")
+
+map("n", "<Leader>d'", "vi\"d")
+map("n", "<Leader>d[", "vi{d")
+map("n", "<Leader>d]", "vi]d")
+map("n", "<Leader>d9", "vi(d")
+map("n", "<Leader>d0", "vi(d")
+
+map("n", "<Leader>d'", "vi\"d")
+map("n", "<Leader>d[", "vi{d")
+map("n", "<Leader>d]", "vi]d")
+map("n", "<Leader>d9", "vi(d")
 map("i", "<C-c>", "```c```<Esc>0fca<CR><Esc><S-o><Esc>p")
 map("n", "<Leader>f[", "f{V%")
 map("n", "<Leader>f]", "f}V%")
@@ -44,19 +92,24 @@ map('n', '<A-{>', 'vi{', { noremap = true })
 map('n', '<A-[>', 'vi[', { noremap = true })
 
 -- Mapeos para cambiar el contenido entre paréntesis, corchetes y llaves
+--
+
 map('n', '<C-9>', 'f(ci(', { noremap = true })
+map('n', '(', 'f(ci(', { noremap = true })
 map('n', '<leader>9', 'vi(', { noremap = true })
+map('n', '<leader>0', 'vi(', { noremap = true })
 map('n', '<C-\'>', 'f"ci"', { noremap = true })
+map('n', '"', 'f"ci"', { noremap = true })
 map('n', '<leader>\'', 'vi"', { noremap = true })
 map('n', '<C-[>', 'f{ci{', { noremap = true })
+map('n', '{', 'f{ci{', { noremap = true })
 map('n', '<leader>[', 'vi{', { noremap = true })
-map('n', '<C-]>', 'f[ci[', { noremap = true })
+map('n', '}', 'f[ci[', { noremap = true })
 map('n', '<leader>]', 'vi[', { noremap = true })
 
 -- Mapeos para insertar líneas vacías encima y debajo de la línea actual
 map('n', '<leader>\'', 'f{li<CR><Esc>ko<Tab>', { noremap = true })
 map('n', '<leader>\\', 'f(li<CR><Esc>ko<Tab>', { noremap = true })
-map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 
 -- Mapeos para comandos específicos
 -- map('n', '<leader>w', ':GoImports<CR>', { noremap = true, silent = true })
@@ -67,8 +120,8 @@ map('n', '<leader>n', ':Telescope live_grep<CR>', { noremap = true, silent = tru
 map('n', '<leader>v', ':GoImports<CR>', { noremap = true, silent = true })
 map('i', '<D-/>', [[fmt.Println()<Esc>:GoImports<CR>ha]], { noremap = true, silent = true })
 map('i', '<C-/>', [[fmt.Println()<Esc>:GoImports<CR>ha]], { noremap = true, silent = true })
-
-map('n', '<C-;>', 'mA:Telescope lsp_definitions<CR>', { noremap = true, silent = true })
+map('n', ';', ':Telescope lsp_definitions<CR>', { noremap = true, silent = true })
+map('n', '<C-;>', ':Telescope lsp_definitions<CR>', { noremap = true, silent = true })
 -- map('i', '<D-.>', [[if err != nil {<CR><Tab>return err<CR>}<Esc>k]],
 --   { noremap = true, silent = true })
 map('i', 'kj', '<Esc>', { noremap = true, silent = true })
@@ -84,9 +137,10 @@ map('n', '<F5>', '"4p', { noremap = true, silent = true })
 
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
 map('n', '<F6>', ':DBUIToggle<CR>', { noremap = true, silent = true })
-map('n', '<F7>', ':w<CR>:!gcc % -lm && ./a.out <CR>', { noremap = true, silent = true })
+map('n', '<F7>', ':w<CR>:!gcc % -lm -o ./main && ./main <CR>', { noremap = true, silent = true })
 map('n', '<leader>r', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
-map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
+-- map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
+map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
 map('n', '<leader>ru', ':w<CR>:term go run main.go <CR>', { noremap = true, silent = true })
 -- Mapeos para el historial del clipboard
@@ -112,12 +166,9 @@ for i = 0, 25 do vim.keymap.set("n", "'" .. upp(i), "'" .. low(i)) end
 -- map('n', '<C-,>', ':bd<CR>', { noremap = true })
 
 -- Abrir y cerrar el explorador
--- map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
 map('v', '<', '<gv', { noremap = true })
 map('v', '>', '>gv', { noremap = true })
-map({ "n", "t" }, "<leader>'", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-end, { desc = "Terminal Toggle Floating term" })
+map({ "n", "t" }, "<leader>'", "vi\"", { desc = "Terminal Toggle Floating term" })
 -- map({ "n", "t" }, "<C-n>", function()
 --     require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 -- end, { desc = "Terminal Toggle Floating term" })
@@ -125,7 +176,6 @@ end, { desc = "Terminal Toggle Floating term" })
 map("n", "<leader>q", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })
-
 
 map("n", "<D-j>", function()
   require("nvchad.tabufline").prev()
@@ -160,12 +210,7 @@ vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search(
   desc = "Search on current file"
 })
 
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-
-vim.keymap.set("n", "<C-,>", [[<cmd>vertical resize +5<cr>]])
-vim.keymap.set("n", "<C-.>", [[<cmd>vertical resize -5<cr>]])
-
+vim.keymap.set("t", "<C-q>", "<C-\\><C-N>")
 vim.keymap.set("i", "<C-a>", "á", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-e>", "é", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-i>", "í", { noremap = true, silent = true })
@@ -174,6 +219,42 @@ vim.keymap.set("i", "<C-u>", "ú", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-n>", "ñ", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-=>", "¿", { noremap = true, silent = true })
 vim.keymap.set("i", "<D-1>", "¡", { noremap = true, silent = true })
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+2<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', '/', "\"fy/\\V<C-R>f<CR>")
+vim.keymap.set("n", "<leader>j", "mzJ`z", { desc = "Join lines and keep cursor in place", silent = true })
+vim.keymap.set("n", "Q", "q")
+map("n", "<C-e>", ":noh<CR>", { desc = "" })
+
+vim.keymap.set("n", "<C-,>", [[<cmd>vertical resize +5<cr>]])
+vim.keymap.set("n", "<C-.>", [[<cmd>vertical resize -5<cr>]])
+
+vim.keymap.set("n", ">", [[<cmd>vertical resize +5<cr>]])
+vim.keymap.set("n", "<", [[<cmd>vertical resize -5<cr>]])
+
+map("n", "<C-q>", ":q<CR>", { desc = "" })
+local actions = require("telescope.actions")
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-q>"] = actions.close,
+      },
+      n = {
+        ["<C-q>"] = actions.close,
+        ["q"] = actions.close,
+        ["<leader>q"] = actions.close,
+      },
+    },
+  },
+})
+-- por si quiero hacer que pueda pasarme a otra ventana estando centrado en una sola ventana
+map("n", "<leader>o", ":ZoomWinTabToggle<CR>", { desc = "" })
+map("n", "C-h", ":KittyNavigateLeft<cr>", { silent = true })
+map("n", "C-j", ":KittyNavigateDown<cr>", { silent = true })
+map("n", "C-k", ":KittyNavigateUp<cr>", { silent = true })
+map("n", "C-l", ":KittyNavigateRight<cr>", { silent = true })
+map("n", "<leader>x", "<C-x>", { silent = true })
+
+map("n", "<C-`>", ":NvimTreeFocus<CR>", { desc = "Terminal" })
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })

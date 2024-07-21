@@ -35,10 +35,16 @@ M.ui = {
   },
 }
 
-M.disabled = {
-  n = {
-    ["<leader>f"] = "",
-    ["v"] = "",
+M.mappings = {
+  disabled = {
+    n = {
+      ["<leader>f"] = "",
+      ["<leader>w"] = "",
+      ["<C-'>"] = "",
+      ["v"] = "",
+      ["<leader>wK"] = ""
+    }
+
   }
 }
 

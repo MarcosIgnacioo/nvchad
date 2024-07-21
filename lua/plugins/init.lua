@@ -130,4 +130,12 @@ return {
     "knubie/vim-kitty-navigator",
     event = "VeryLazy",
   },
+  {
+    "which-key.nvim",
+    enabled = false
+  },
+  {
+    "duane9/nvim-rg",
+    event = "VeryLazy",
+  }
 }

@@ -4,8 +4,9 @@ require "nvchad.mappings"
 -- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 -- vim.cmd([[au FocusLost * :wa]])
 -- aaa
-
 local map = vim.keymap.set
+local wtf = vim.keymap.del
+wtf("n", "<leader>wk");
 map("i", "<Esc>", "<Esc>", { desc = "" })
 map("n", "W", "viW", { desc = "" })
 map("n", "K", ":lua vim.lsp.buf.hover()<CR>", { desc = "" })
@@ -24,7 +25,6 @@ map("v", "F",
 map("i", "<C-->", "_")
 map("n", "dW", "ciW")
 map("n", "D", "ciW")
-map("n", "<C-'>", "f\"ci\"")
 map("n", "L", "A")
 map("n", "dl", "d$a")
 map("i", "<C-[>", "<")
@@ -174,6 +174,8 @@ map("n", "<leader>q", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })
 
+map("n", "<leader>q", ":q<CR>")
+
 map("n", "<leader>Q", ":%bd|e#<CR>", { desc = "Buffer Close" })
 
 map("n", "<D-j>", function()
@@ -270,3 +272,10 @@ map("v", "}", "f}", { desc = "Save all and quit" })
 map("v", "]", "f]", { desc = "Save all and quit" })
 map("v", "4", "$h", { desc = "Save all and quit" })
 map("v", ";", "f;", { desc = "Save all and quit" })
+map("n", "<C-\\'>", "f\"ci\"")
+map("t", "KJ", "<C-\\><C-n>")
+map("t", "C-h", "<Esc>:KittyNavigateLeft<cr>", { silent = true })
+map("t", "C-j", "<Esc>:KittyNavigateDown<cr>", { silent = true })
+map("t", "C-k", "<Esc>:KittyNavigateUp<cr>", { silent = true })
+map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
+map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })

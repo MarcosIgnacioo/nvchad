@@ -22,16 +22,16 @@ M.ui = {
     -- Variable = { italic = false, fg = "nord_blue" },
     -- ["@variable"] = { italic = false, fg = "nord_blue" },
     --
-    Keyword = { italic = false, fg = "#f5aa64" },
-    ["@keyword"] = { italic = false, fg = "#f5aa64" },
+    -- Keyword = { italic = false, fg = "#f5aa64" },
+    -- ["@keyword"] = { italic = false, fg = "#f5aa64" },
 
     -- Function = { italic = true, bold = true },
     -- ["@function"] = { italic = true, bold = true },
 
     -- Operator = { bold = true, fg = "white" },
     -- ["@operator"] = { bold = true, fg = "white" },
-    String = { bold = true },
-    ["@string"] = { bold = true },
+    -- String = { bold = true, fg = "dark_purple" },
+    -- ["@string"] = { bold = true, fg = "dark_purple" },
   },
 }
 

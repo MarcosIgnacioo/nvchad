@@ -63,3 +63,22 @@ require('nvim-tree').setup({
     },
   },
 })
+
+local builtin = require('telescope.builtin')
+local config = require('telescope.config')
+
+-- Return a list of files found in quickfix, skipping duplicates
+local quickfix_files = function()
+  local qflist = vim.fn.getqflist()
+  local files = {}
+  local seen = {}
+  for k in pairs(qflist) do
+    local path = vim.fn.bufname(qflist[k]["bufnr"])
+    if not seen[path] then
+      files[#files + 1] = path
+      seen[path] = true
+    end
+  end
+  table.sort(files)
+  return files
+end

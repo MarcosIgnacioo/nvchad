@@ -62,13 +62,13 @@ return {
       local mark = require("harpoon.mark")
       local ui = require("harpoon.ui")
 
-      vim.keymap.set("n", "<leader>t", mark.add_file)
-      vim.keymap.set("n", "<leader>m", ui.toggle_quick_menu)
+      vim.keymap.set("n", "<leader>m", mark.add_file)
+      vim.keymap.set("n", "<leader>t", ui.toggle_quick_menu)
 
-      vim.keymap.set("n", ";a", function() ui.nav_file(1) end)
-      vim.keymap.set("n", ";s", function() ui.nav_file(2) end)
-      vim.keymap.set("n", ";d", function() ui.nav_file(3) end)
-      vim.keymap.set("n", ";f", function() ui.nav_file(4) end)
+      vim.keymap.set("n", "1", function() ui.nav_file(1) end)
+      vim.keymap.set("n", "2", function() ui.nav_file(2) end)
+      vim.keymap.set("n", "3", function() ui.nav_file(3) end)
+      vim.keymap.set("n", "4", function() ui.nav_file(4) end)
     end
   },
   {
@@ -135,7 +135,21 @@ return {
     enabled = false
   },
   {
+    "lukas-reineke/indent-blankline.nvim ",
+    enabled = false
+  },
+  {
     "duane9/nvim-rg",
     event = "VeryLazy",
+  },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- add any options here
+    },
+    event = "VeryLazy",
+    config = function()
+      require('Comment').setup()
+    end
   }
 }

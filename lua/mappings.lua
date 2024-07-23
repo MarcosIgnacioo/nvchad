@@ -79,7 +79,6 @@ map('v', '0', '_', { noremap = true })
 map('v', '9', '_', { noremap = true })
 
 -- Mapeo para mover el cursor al final de la línea sin cambiar la columna
-map('n', '4', '$', { noremap = true })
 map('v', '4', '$', { noremap = true })
 
 -- Mapeos para seleccionar texto entre paréntesis, corchetes y llaves
@@ -135,7 +134,6 @@ map('n', '<F5>', '"4p', { noremap = true, silent = true })
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
 map('n', '<F7>', ':w<CR>:!gcc % -lm -o ./main && ./main <CR>', { noremap = true, silent = true })
 map('n', '<F6>', ':make<CR>', { noremap = true, silent = true })
-map('n', '<leader>r', ':w<CR>:!gcc % && ./a.out <CR>', { noremap = true, silent = true })
 -- map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
 map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
@@ -265,13 +263,14 @@ map("n", "<C-`>", ":NvimTreeFocus<CR>", { desc = "Terminal" })
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
 map("n", "Q", ":wa<CR>:mksession!<CR>:%bd<CR>:q<CR>", { desc = "Save all and quit" })
 map("n", "<C-s><C-s>", ":wa<CR>:mksession!<CR>:%bd<CR>:q<CR>", { desc = "Save all and quit" })
-map("n", "<C-z>", ":echo  \"1 hit knock out\" <CR>", { desc = "Save all and quit" })
+map("n", "<C-z>", ":%bd|e#<CR>", { desc = "Buffer Close" })
 map("i", "<C-p>", "<?=$?><Esc>hi", { desc = "Save all and quit" })
 map("v", "'", "f\"h", { desc = "Save all and quit" })
 map("v", "}", "f}", { desc = "Save all and quit" })
 map("v", "]", "f]", { desc = "Save all and quit" })
 map("v", "4", "$h", { desc = "Save all and quit" })
-map("v", ";", "f;", { desc = "Save all and quit" })
+map("v", ";", "$", { desc = "Save all and quit" })
+map("n", ";", "$", { desc = "Save all and quit" })
 map("n", "<C-\\'>", "f\"ci\"")
 map("t", "KJ", "<C-\\><C-n>")
 map("t", "C-h", "<Esc>:KittyNavigateLeft<cr>", { silent = true })
@@ -279,3 +278,11 @@ map("t", "C-j", "<Esc>:KittyNavigateDown<cr>", { silent = true })
 map("t", "C-k", "<Esc>:KittyNavigateUp<cr>", { silent = true })
 map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
 map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
+map("n", "<leader>th", ":Telescope themes <CR> gruvbox<Esc> q", { desc = "telescope nvchad themes" })
+map(
+  "n",
+  "<leader>ff",
+  "mA<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+  { desc = "telescope find all files" }
+)
+map('n', '<leader>r', ':bd|b#<cr><C-^>', { noremap = true, silent = true })

@@ -13,12 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +2 init.lua
-badd +0 ~/.config/nvim
+badd +1 lua/mappings.lua
 argglobal
 %argdel
-$argadd ~/.config/nvim
-edit init.lua
+$argadd .
+edit lua/mappings.lua
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -30,11 +29,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 4 - ((3 * winheight(0) + 15) / 31)
+let s:l = 2 - ((1 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
+keepjumps 2
 normal! 0
 lcd ~/.config/nvim
 tabnext 1

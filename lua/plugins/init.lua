@@ -65,10 +65,10 @@ return {
       vim.keymap.set("n", "<leader>m", mark.add_file)
       vim.keymap.set("n", "<leader>t", ui.toggle_quick_menu)
 
-      vim.keymap.set("n", "1", function() ui.nav_file(1) end)
-      vim.keymap.set("n", "2", function() ui.nav_file(2) end)
-      vim.keymap.set("n", "3", function() ui.nav_file(3) end)
-      vim.keymap.set("n", "4", function() ui.nav_file(4) end)
+      vim.keymap.set("n", ";1", function() ui.nav_file(1) end)
+      vim.keymap.set("n", ";2", function() ui.nav_file(2) end)
+      vim.keymap.set("n", ";3", function() ui.nav_file(3) end)
+      vim.keymap.set("n", ";4", function() ui.nav_file(4) end)
     end
   },
   {
@@ -103,24 +103,6 @@ return {
   "kristijanhusak/vim-dadbod-completion",
   "kristijanhusak/vim-dadbod-ui",
   -- lazy.nvim:
-  {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      'nvimtools/hydra.nvim',
-    },
-    opts = {},
-    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-    keys = {
-      {
-        mode = { 'v', 'n' },
-        '<Leader>;',
-        '<cmd>MCstart<cr>',
-        desc = 'Create a selection for selected text or word under the cursor',
-      },
-    },
-  },
-  { 'echasnovski/mini.splitjoin', version = '*' },
   "sindrets/diffview.nvim",
   {
     "troydm/zoomwintab.vim",
@@ -151,5 +133,60 @@ return {
     config = function()
       require('Comment').setup()
     end
-  }
+  }, {
+  "mg979/vim-visual-multi",
+  event = "VeryLazy",
+},
+  {
+    "jghauser/kitty-runner.nvim",
+    event = "VeryLazy",
+    config = function()
+      local opts = require("kitty-runner.config").window_config
+      opts.kitty_port = "unix:@mykitty"
+      require("kitty-runner").setup(opts)
+    end
+  },
+  {
+    "j-morano/buffer_manager.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim"
+    },
+    config = function()
+      require("buffer_manager").setup({})
+      require "configs.buffer_man"
+    end
+  },
+  {
+    'echasnovski/mini.files',
+    config = function()
+      require('mini.files').setup({
+        mappings = {
+          go_in       = 'L',
+          go_in_plus  = 'l',
+          go_out      = 'H',
+          go_out_plus = 'h',
+        },
+      })
+    end,
+    version = '*',
+    event = "VeryLazy",
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {
+      bind = true, -- This is mandatory, otherwise border config won't get registered.
+      handler_opts = {
+        border = "rounded"
+      },
+      -- or, provide a table with 3 icons
+      hint_prefix = {
+        above = "↙ ", -- when the hint is on the line above the current line
+        current = "← ", -- when the hint is on the same line
+        below = "↖ " -- when the hint is on the line below the current line
+      }
+    },
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
 }

@@ -1,6 +1,9 @@
 require "nvchad.mappings"
 -- add yours here
 
+require "nvchad.mappings"
+-- add yours here
+
 -- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 -- vim.cmd([[au FocusLost * :wa]])
 -- aaa
@@ -9,7 +12,7 @@ local wtf = vim.keymap.del
 wtf("n", "<leader>wk");
 map("i", "<Esc>", "<Esc>", { desc = "" })
 map("n", "W", "viW", { desc = "" })
-map("n", "K", ":lua vim.lsp.buf.hover()<CR>", { desc = "" })
+map("n", "H", ":lua vim.lsp.buf.hover()<CR>", { desc = "" })
 map("n", "dB", "dbcl", { desc = "" })
 map("n", "f[", "f{", { desc = "" })
 map("n", "f{", "f[", { desc = "" })
@@ -21,7 +24,7 @@ map("i", "kj", "<ESC>")
 map("i", "<C-q>", "=")
 map("i", "<D-'>", "=")
 map("v", "F",
-  "yo<Esc>oif (<Esc>pa == NULL) <Esc>A{}<Esc>hhf{ci{<CR><Esc><S-o>printf(\"<Esc>pa is NULL\\n\");<CR>return NULL;<Esc>jf}o")
+  "yo<Esc>oif (!<Esc>pa)<CR>return NULL;<Esc>")
 map("i", "<C-->", "_")
 map("n", "dW", "ciW")
 map("n", "D", "ciW")
@@ -72,11 +75,9 @@ map("n", "<leader>w", ":w<CR>")
 map("n", "<leader>fn", ":e %:h/")
 -- Mapeo para mover el cursor al inicio de la línea sin cambiar la columna
 map('n', '0', '_', { noremap = true })
-map('n', '9', '_', { noremap = true })
 map('n', '<leader>b', '_', { noremap = true })
 map('v', '<leader>b', '_', { noremap = true })
 map('v', '0', '_', { noremap = true })
-map('v', '9', '_', { noremap = true })
 
 -- Mapeo para mover el cursor al final de la línea sin cambiar la columna
 map('v', '4', '$', { noremap = true })
@@ -90,9 +91,7 @@ map('n', '<A-[>', 'vi[', { noremap = true })
 --
 
 map('n', '<C-9>', 'f(ci(', { noremap = true })
-map('n', '(', 'f(ci(', { noremap = true })
 map('n', '<leader>9', 'vi(', { noremap = true })
-map('n', '<leader>0', 'vi(', { noremap = true })
 map('n', '<C-\'>', 'f"ci"', { noremap = true })
 map('n', '"', 'f"ci"', { noremap = true })
 map('n', '<leader>\'', 'vi"', { noremap = true })
@@ -155,7 +154,7 @@ for i = 0, 25 do vim.keymap.set("n", "m" .. upp(i), "m" .. low(i)) end
 for i = 0, 25 do vim.keymap.set("n", "'" .. low(i), "'" .. upp(i)) end
 for i = 0, 25 do vim.keymap.set("n", "'" .. upp(i), "'" .. low(i)) end
 
--- map("n", "gl", vim.lsp.diagnostic.show_line_diagnostics, { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 
 -- Cerrar buffer actual
 -- map('n', '<C-,>', ':bd<CR>', { noremap = true })
@@ -172,8 +171,8 @@ map("n", "<leader>q", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })
 
-map("n", "<leader>q", ":q<CR>")
-
+map("n", "<leader>c", ":close<CR>")
+-- map("n", "<leader>q", ":bd<CR>:vsplit<CR>", { desc = "Buffer Close" })
 map("n", "<leader>Q", ":%bd|e#<CR>", { desc = "Buffer Close" })
 
 map("n", "<D-j>", function()
@@ -184,18 +183,10 @@ map("n", "<D-k>", function()
   require("nvchad.tabufline").next()
 end, { desc = "Buffer Goto next" })
 
-map("i", "<D-k>", function()
-  require("nvchad.tabufline").next()
-end, { desc = "Buffer Goto next" })
-
-map("i", "<D-j>", function()
-  require("nvchad.tabufline").prev()
-end, { desc = "Buffer Goto prev" })
 
 -- quick fix list prev and next
 -- vim.keymap.set("n", "<leader>;", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
 -- vim.keymap.set("n", "<leader>h", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
---
 
 vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", { desc = "Forward qfixlist" })
 vim.keymap.set("n", "<leader>h", "<cmd>split<CR>", { desc = "Backward qfixlist" })
@@ -222,11 +213,7 @@ vim.keymap.set("i", "<C-u>", "ú", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-n>", "ñ", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-=>", "¿", { noremap = true, silent = true })
 vim.keymap.set("i", "<D-1>", "¡", { noremap = true, silent = true })
-vim.keymap.set("v", "J", ":m '>+2<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', '/', "\"fy/\\V<C-R>f<CR>")
-vim.keymap.set("n", "<leader>j", "mzJ`z", { desc = "Join lines and keep cursor in place", silent = true })
-vim.keymap.set("n", "Q", "q")
 map("n", "<C-e>", ":noh<CR>", { desc = "" })
 
 vim.keymap.set("n", "<C-,>", [[<cmd>vertical resize +5<cr>]])
@@ -260,7 +247,7 @@ map("n", "C-l", ":KittyNavigateRight<cr>", { silent = true })
 map("n", "<leader>x", "<C-x>", { silent = true })
 
 map("n", "<C-`>", ":NvimTreeFocus<CR>", { desc = "Terminal" })
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
+map("n", "<leader>e", ":lua MiniFiles.open()<CR>", { desc = "Nvimtree Toggle window" })
 map("n", "Q", ":wa<CR>:mksession!<CR>:%bd<CR>:q<CR>", { desc = "Save all and quit" })
 map("n", "<C-s><C-s>", ":wa<CR>:mksession!<CR>:%bd<CR>:q<CR>", { desc = "Save all and quit" })
 map("n", "<C-z>", ":%bd|e#<CR>", { desc = "Buffer Close" })
@@ -277,12 +264,20 @@ map("t", "C-h", "<Esc>:KittyNavigateLeft<cr>", { silent = true })
 map("t", "C-j", "<Esc>:KittyNavigateDown<cr>", { silent = true })
 map("t", "C-k", "<Esc>:KittyNavigateUp<cr>", { silent = true })
 map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
-map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
 map("n", "<leader>th", ":Telescope themes <CR> gruvbox<Esc> q", { desc = "telescope nvchad themes" })
-map(
-  "n",
-  "<leader>ff",
-  "mA<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-  { desc = "telescope find all files" }
-)
 map('n', '<leader>r', ':bd|b#<cr><C-^>', { noremap = true, silent = true })
+-- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+-- vim.cmd([[au FocusLost * :wa]])
+vim.keymap.set("v", "J", ":m '>+2<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+
+map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
+
+-- vim.keymap.set("n", "<Tab>", function()
+--   require("nvchad.tabufline").prev()
+-- end, { desc = "Buffer Goto prev" })
+--
+-- vim.keymap.set("n", "|", function()
+--   require("nvchad.tabufline").next()
+-- end, { desc = "Buffer Goto next" }, { silent = true, noremap = true, })

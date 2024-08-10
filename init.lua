@@ -36,6 +36,7 @@ end)
 require("cmp").setup.filetype("md", {
   enabled = false,
 })
+
 dofile(vim.g.base46_cache .. "syntax")
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)

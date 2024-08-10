@@ -71,3 +71,13 @@ require("cmp").setup.filetype("markdown", {
 require("cmp").setup.filetype("md", {
   enabled = false,
 })
+
+-- Configuración para ocultar la línea de estado
+vim.opt.laststatus = 0
+
+-- Configuración para vincular StatusLine y StatusLineNC al grupo de resaltado Normal
+vim.cmd('hi! link StatusLine Normal')
+vim.cmd('hi! link StatusLineNC Normal')
+
+-- Configuración para establecer la línea de estado como una línea de guiones
+vim.opt.statusline = '%{repeat(\'─\',winwidth(\'.\'))}'

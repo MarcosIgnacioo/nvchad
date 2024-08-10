@@ -31,6 +31,7 @@ return {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
+
   },
   {
     'folke/zen-mode.nvim',
@@ -38,7 +39,7 @@ return {
     opts = {
       window = {
         backdrop = 0.96,        -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        width = 80,             -- width of the Zen window
+        width = 99,             -- width of the Zen window
         height = 1,             -- height of the Zen window
         options = {
           signcolumn = "no",    -- disable signcolumn
@@ -48,11 +49,11 @@ return {
       plugins = {
         options = {
           enabled = true,
-          ruler = true,    -- disables the ruler text in the cmd line area
-          showcmd = false, -- disables the command in the last line of the screen
-          laststatus = 0,  -- turn off the statusline in zen mode
+          ruler = true,   -- disables the ruler text in the cmd line area
+          showcmd = true, -- disables the command in the last line of the screen
+          laststatus = 0, -- turn off the statusline in zen mode
         }
-      }
+      },
     }
   },
   {
@@ -189,4 +190,15 @@ return {
     },
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
+  {
+    'MattesGroeger/vim-bookmarks',
+    event = "VeryLazy",
+  },
+  {
+    "NvChad/ui",
+    config = function()
+      vim.opt.statusline = ""
+    end
+  }
+
 }

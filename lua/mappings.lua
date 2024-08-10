@@ -146,13 +146,13 @@ map("n", "<F4>", '"3p', { noremap = true, silent = true })
 map("n", "<F5>", '"4p', { noremap = true, silent = true })
 
 -- Manera gamer de hacer las marcas globales
-local low = function(i) return string.char(97 + i) end
-local upp = function(i) return string.char(65 + i) end
-
-for i = 0, 25 do vim.keymap.set("n", "m" .. low(i), "m" .. upp(i)) end
-for i = 0, 25 do vim.keymap.set("n", "m" .. upp(i), "m" .. low(i)) end
-for i = 0, 25 do vim.keymap.set("n", "'" .. low(i), "'" .. upp(i)) end
-for i = 0, 25 do vim.keymap.set("n", "'" .. upp(i), "'" .. low(i)) end
+-- local low = function(i) return string.char(97 + i) end
+-- local upp = function(i) return string.char(65 + i) end
+--
+-- for i = 0, 25 do vim.keymap.set("n", "m" .. low(i), "m" .. upp(i)) end
+-- for i = 0, 25 do vim.keymap.set("n", "m" .. upp(i), "m" .. low(i)) end
+-- for i = 0, 25 do vim.keymap.set("n", "'" .. low(i), "'" .. upp(i)) end
+-- for i = 0, 25 do vim.keymap.set("n", "'" .. upp(i), "'" .. low(i)) end
 
 vim.api.nvim_set_keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 
@@ -240,10 +240,10 @@ require("telescope").setup({
 })
 -- por si quiero hacer que pueda pasarme a otra ventana estando centrado en una sola ventana
 map("n", "<leader>o", ":ZoomWinTabToggle<CR>", { desc = "" })
-map("n", "C-h", ":KittyNavigateLeft<cr>", { silent = true })
-map("n", "C-j", ":KittyNavigateDown<cr>", { silent = true })
-map("n", "C-k", ":KittyNavigateUp<cr>", { silent = true })
-map("n", "C-l", ":KittyNavigateRight<cr>", { silent = true })
+map("n", "C-h", ":ZenMode<CR>", { silent = true })
+map("n", "C-j", ":ZenMode<CR>", { silent = true })
+map("n", "C-k", ":ZenMode<CR>", { silent = true })
+map("n", "C-l", ":ZenMode<CR>", { silent = true })
 map("n", "<leader>x", "<C-x>", { silent = true })
 
 map("n", "<C-`>", ":NvimTreeFocus<CR>", { desc = "Terminal" })
@@ -272,7 +272,17 @@ vim.keymap.set("v", "J", ":m '>+2<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 
-map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
+-- map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
+
+vim.api.nvim_set_keymap('n', '<Leader>i', ':BookmarkAnnotate<CR>', {})
+vim.api.nvim_set_keymap('n', ';d', ':BookmarkShowAll<CR>', {})
+vim.api.nvim_set_keymap('n', ';a', ':BookmarkNext<CR>', {})
+vim.api.nvim_set_keymap('n', ';s', ':BookmarkPrev<CR>', {})
+vim.api.nvim_set_keymap('n', '<Leader>c', ':BookmarkClear<CR>', {})
+vim.api.nvim_set_keymap('n', '<Leader>x', ':BookmarkClearAll<CR>', {})
+vim.api.nvim_set_keymap('n', '<Leader>kk', ':BookmarkMoveUp<CR>', {})
+vim.api.nvim_set_keymap('n', '<Leader>jj', ':BookmarkMoveDown<CR>', {})
+vim.api.nvim_set_keymap('n', '<Leader>g', ':BookmarkMoveToLine<CR>', {})
 
 -- vim.keymap.set("n", "<Tab>", function()
 --   require("nvchad.tabufline").prev()
@@ -281,3 +291,8 @@ map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
 -- vim.keymap.set("n", "|", function()
 --   require("nvchad.tabufline").next()
 -- end, { desc = "Buffer Goto next" }, { silent = true, noremap = true, })
+
+-- wtf("n", "C-h")
+-- wtf("n", "C-j")
+-- wtf("n", "C-k")
+-- wtf("n", "C-l")

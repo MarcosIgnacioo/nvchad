@@ -286,6 +286,8 @@ vim.api.nvim_set_keymap('n', '<Leader>kk', ':BookmarkMoveUp<CR>', {})
 vim.api.nvim_set_keymap('n', '<Leader>jj', ':BookmarkMoveDown<CR>', {})
 vim.api.nvim_set_keymap('n', '<Leader>g', ':BookmarkMoveToLine<CR>', {})
 
+map("n", "<BS>", ":f<CR>", { desc = "" })
+
 -- vim.keymap.set("n", "<Tab>", function()
 --   require("nvchad.tabufline").prev()
 -- end, { desc = "Buffer Goto prev" })

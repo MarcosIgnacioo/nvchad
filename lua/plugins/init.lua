@@ -163,6 +163,7 @@ return {
     config = function()
       require('mini.files').setup({
         mappings = {
+          close       = '<leader>e',
           go_in       = 'L',
           go_in_plus  = 'l',
           go_out      = 'H',

@@ -15,6 +15,7 @@ o.softtabstop = 2
 o.incsearch = false
 o.breakindent = true
 o.cursorlineopt = 'both' -- to enable cursorline!
+o.inccommand = "split";
 
 local cmp = require("cmp")
 cmp.setup({

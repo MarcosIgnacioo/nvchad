@@ -10,6 +10,8 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 local wtf = vim.keymap.del
 wtf("n", "<leader>wk");
+wtf("n", "<tab>");
+wtf("n", "<S-tab>");
 map("i", "<Esc>", "<Esc>", { desc = "" })
 map("n", "W", "viW", { desc = "" })
 map("n", "H", ":lua vim.lsp.buf.hover()<CR>", { desc = "" })

@@ -300,3 +300,7 @@ map("n", "<BS>", ":f<CR>", { desc = "" })
 -- wtf("n", "C-j")
 -- wtf("n", "C-k")
 -- wtf("n", "C-l")
+
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to clipboard" })

@@ -215,19 +215,15 @@ return {
     event = "VeryLazy",
   },
   {
-    'edluffy/hologram.nvim',
-    config = function()
-      require('hologram').setup {
-        auto_display = true -- WIP automatic markdown image display, may be prone to breaking
-      }
-    end,
-    event = "VeryLazy",
-  },
-  {
     'anuvyklack/pretty-fold.nvim',
     event = "VeryLazy",
     config = function()
       require('pretty-fold').setup()
     end
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    event = "VeryLazy",
+    version = "*"
+  }
 }

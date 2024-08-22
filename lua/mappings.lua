@@ -109,7 +109,7 @@ map('n', '<leader>\\', 'f(li<CR><Esc>ko<Tab>', { noremap = true })
 -- Mapeos para comandos específicos
 -- map('n', '<leader>w', ':GoImports<CR>', { noremap = true, silent = true })
 -- map('n', '<C-w>', 'mAggvG=i<Esc>\'A', { noremap = true, silent = true })
-map('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })
+map('n', '<leader>z', ':NoNeckPain<CR>', { noremap = true, silent = true })
 map('n', '<leader>n', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 map("v", "<C-f>", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Live grep" })
 -- map('i', '<C-;>', 'System.out.println();<Esc>hi', { noremap = true, silent = true })

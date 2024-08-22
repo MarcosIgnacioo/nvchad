@@ -82,7 +82,7 @@ return {
     config = function()
       require("go").setup()
     end,
-    event = { "CmdlineEnter" },
+    event = 'VeryLazy',
     ft = { "go", 'gomod' },
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
@@ -93,11 +93,12 @@ return {
     end,
   },
   {
-    "ggandor/leap.nvim",
-    event = 'VeryLazy',
-    config = function()
-      require "configs.leap"
-    end,
+    'smoka7/hop.nvim',
+    event = "VeryLazy",
+    version = "*",
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran'
+    }
   },
   "nvim-pack/nvim-spectre",
   "tpope/vim-dadbod",
@@ -163,7 +164,7 @@ return {
     config = function()
       require('mini.files').setup({
         mappings = {
-          close       = '<leader>e',
+          close       = 'q',
           go_in       = 'L',
           go_in_plus  = 'l',
           go_out      = 'H',
@@ -209,5 +210,24 @@ return {
     event = "VeryLazy",
     version = '*'
   },
-
+  {
+    "cbochs/portal.nvim",
+    event = "VeryLazy",
+  },
+  {
+    'edluffy/hologram.nvim',
+    config = function()
+      require('hologram').setup {
+        auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+      }
+    end,
+    event = "VeryLazy",
+  },
+  {
+    'anuvyklack/pretty-fold.nvim',
+    event = "VeryLazy",
+    config = function()
+      require('pretty-fold').setup()
+    end
+  },
 }

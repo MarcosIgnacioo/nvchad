@@ -51,7 +51,19 @@ lspconfig.tsserver.setup {
 }
 
 lspconfig.gopls.setup {
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+  if client.supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable(true, {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+      })
+  end
+  end,
   on_init = on_init,
   capabilities = capabilities,
 }

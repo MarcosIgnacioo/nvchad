@@ -5,6 +5,9 @@ local M = {}
 
 M.ui = {
   theme = "gruvchad",
+  tabufline = {
+    enabled= false
+  }
 }
 
 return M

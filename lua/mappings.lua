@@ -168,12 +168,12 @@ map({ "n", "t" }, "<leader>'", "vi\"", { desc = "Terminal Toggle Floating term" 
 --     require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 -- end, { desc = "Terminal Toggle Floating term" })
 
-map("n", "<leader>q", function()
-  require("nvchad.tabufline").close_buffer()
-end, { desc = "Buffer Close" })
+-- map("n", "<leader>q", function()
+--   require("nvchad.tabufline").close_buffer()
+-- end, { desc = "Buffer Close" })
 
 map("n", "<leader>c", ":close<CR>")
--- map("n", "<leader>q", ":bd<CR>:vsplit<CR>", { desc = "Buffer Close" })
+map("n", "<leader>q", ":bd<CR>", { desc = "Buffer Close" })
 map("n", "<leader>Q", ":%bd|e#<CR>", { desc = "Buffer Close" })
 
 map("n", "<D-j>", function()
@@ -307,3 +307,6 @@ map("n", "<leader>y", ":HopYankChar1<CR>")
 map("n", "<leader>p", ":HopPaste<CR>")
 map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
 map("n", "<leader>i", "<cmd>Portal jumplist forward<cr>")
+map("n", "<leader>p", "<cmd>Telescope neovim-project history<cr>")
+map("i", "-", "_")
+map("i", "_", "-")

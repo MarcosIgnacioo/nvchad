@@ -93,8 +93,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
-vim.g.neovide_transparency = 0.9
+vim.g.neovide_transparency = 0.95
 vim.g.neovide_cursor_trail_size = 0
 vim.g.neovide_cursor_animation_length = 0.05
 vim.g.neovide_position_animation_length = 0.05
 vim.g.neovide_scroll_animation_length = 0.05
+vim.opt.termguicolors = true

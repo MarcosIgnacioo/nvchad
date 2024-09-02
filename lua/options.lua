@@ -14,7 +14,7 @@ o.shiftwidth = 2
 o.softtabstop = 2
 o.incsearch = false
 o.breakindent = true
-o.cursorlineopt = 'both' -- to enable cursorline!
+-- o.cursorlineopt = 'both' -- to enable cursorline!
 o.inccommand = "split";
 
 local cmp = require("cmp")
@@ -84,14 +84,14 @@ vim.cmd('hi! link StatusLineNC Normal')
 vim.opt.statusline = '%{repeat(\'─\',winwidth(\'.\'))}'
 -- Run gofmt + goimports on save
 
-local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    require('go.format').goimports()
-  end,
-  group = format_sync_grp,
-})
+-- local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.go",
+--   callback = function()
+--     require('go.format').goimports()
+--   end,
+--   group = format_sync_grp,
+-- })
 
 vim.g.neovide_transparency = 0.95
 vim.g.neovide_cursor_trail_size = 0

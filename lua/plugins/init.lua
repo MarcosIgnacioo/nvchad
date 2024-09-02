@@ -21,7 +21,7 @@ return {
       ensure_installed = {
         "lua-language-server", "stylua",
         "html-lsp", "css-lsp", "prettier", "htmx", "gopls",
-        "gofmt", "lua_format", "pyright", "eslint", "prettierd", "zls"
+        "gofmt", "lua_format", "pyright", "prettierd", "zls"
       },
     }
   },
@@ -251,5 +251,25 @@ return {
     },
     lazy = false,
     priority = 100,
+  },
+  {
+    'echasnovski/mini.ai',
+    version = '*',
+    config = function()
+      require('mini.ai').setup()
+    end,
+    event = "VeryLazy",
+  },
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    event = "VeryLazy",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig",         -- optional
+    },
+    opts = {}                          -- your configuration
   },
 }

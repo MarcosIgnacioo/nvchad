@@ -196,12 +196,12 @@ return {
     'MattesGroeger/vim-bookmarks',
     event = "VeryLazy",
   },
-  {
-    "NvChad/ui",
-    config = function()
-      vim.opt.statusline = ""
-    end
-  },
+  -- {
+  --   "NvChad/ui",
+  --   config = function()
+  --     vim.opt.statusline = ""
+  --   end
+  -- },
   {
     'echasnovski/mini.surround',
     config = function()
@@ -280,5 +280,9 @@ return {
       vim.keymap.set({ 'n', 'x', 'o' }, '<leader>s', '<Plug>(leap-backward)')
       vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
     end
+  },
+  {
+    "indent-blankline.nvim",
+    enabled = false,
   }
 }

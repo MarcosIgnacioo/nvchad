@@ -4,8 +4,19 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "intelephense", "tsserver", "htmx", "gopls", "pyright", "rust_analyzer",
-  "zls", "asm_lsp", "marksman" }
+local servers = {
+  "html",
+  "cssls",
+  "intelephense",
+  "ts_ls",
+  "htmx",
+  "gopls",
+  "pyright",
+  "rust_analyzer",
+  "zls",
+  "asm_lsp",
+  "marksman",
+}
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -16,12 +27,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-
 local function organize_imports()
   local params = {
     command = "_typescript.organizeImports",
     arguments = { vim.api.nvim_buf_get_name(0) },
-    title = ""
+    title = "",
   }
   vim.lsp.buf.execute_command(params)
 end
@@ -39,34 +49,34 @@ local function organize_imports_golang(client, bufnr)
   end
 end
 
-local mason_registry = require('mason-registry')
-local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() ..
-    '/node_modules/@vue/language-server'
-lspconfig.tsserver.setup {
+local mason_registry = require "mason-registry"
+local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+  .. "/node_modules/@vue/language-server"
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   commands = {
     OrganizeImports = {
       organize_imports,
-      description = "Organize Imports"
-    }
+      description = "Organize Imports",
+    },
   },
   init_options = {
     plugins = {
       {
-        name = '@vue/typescript-plugin',
+        name = "@vue/typescript-plugin",
         location = vue_language_server_path,
-        languages = { 'vue' },
+        languages = { "vue" },
       },
     },
   },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 }
 lspconfig.volar.setup {}
 
 lspconfig.gopls.setup {
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/inlayHint") then
+    if client.supports_method "textDocument/inlayHint" then
       vim.lsp.inlay_hint.enable(true, {
         assignVariableTypes = true,
         compositeLiteralFields = true,
@@ -88,10 +98,9 @@ lspconfig.htmx.setup {
   on_init = on_init,
   capabilities = capabilities,
   servers = {
-    ['htmx'] = { 'typescriptreact' }
-  }
+    ["htmx"] = { "typescriptreact" },
+  },
 }
-
 
 -- lspconfig.gopls.setup({
 --  on_attach = {function(client, bufnr)
@@ -107,7 +116,6 @@ lspconfig.htmx.setup {
 --  capabilities = capabilities,
 -- })
 
-
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
   on_init = on_init,
@@ -118,7 +126,7 @@ lspconfig.asm_lsp.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern('./')
+  root_dir = lspconfig.util.root_pattern "./",
 }
 
 lspconfig.clangd.setup {
@@ -131,6 +139,6 @@ lspconfig.clangd.setup {
       -- "-I/home/happy/newlib/newlib/libc/include/sys",
       -- "-I/home/happy/newlib/include",
       -- "-I/usr/include"
-    }
-  }
+    },
+  },
 }

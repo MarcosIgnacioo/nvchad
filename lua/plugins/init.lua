@@ -176,25 +176,24 @@ return {
     version = "*",
     event = "VeryLazy",
   },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {
-      bind = true, -- This is mandatory, otherwise border config won't get registered.
-      handler_opts = {
-        border = "rounded",
-      },
-      -- or, provide a table with 3 icons
-      hint_prefix = {
-        above = "↙ ", -- when the hint is on the line above the current line
-        current = "← ", -- when the hint is on the same line
-        below = "↖ ", -- when the hint is on the line below the current line
-      },
-    },
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
-    end,
-  },
+  -- {
+  --   "ray-x/lsp_signature.nvim", event = "VeryLazy",
+  --   opts = {
+  --     bind = true, -- This is mandatory, otherwise border config won't get registered.
+  --     handler_opts = {
+  --       border = "rounded",
+  --     },
+  --     -- or, provide a table with 3 icons
+  --     hint_prefix = {
+  --       above = "↙ ", -- when the hint is on the line above the current line
+  --       current = "← ", -- when the hint is on the same line
+  --       below = "↖ ", -- when the hint is on the line below the current line
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("lsp_signature").setup(opts)
+  --   end,
+  -- },
   {
     "MattesGroeger/vim-bookmarks",
     event = "VeryLazy",
@@ -238,6 +237,8 @@ return {
         "~/exercism/*",
         "~/.config/*",
         "~/farhampton/advanced_cc/*",
+        "~/farhampton/escuela/**/*",
+        "~/farhampton/escuela/*/*",
         "~/farhampton/adventure_c/*",
         "~/farhampton/*",
         "~/farhampton/gamedev/*",
@@ -258,14 +259,14 @@ return {
     lazy = false,
     priority = 100,
   },
-  -- {
-  --   "echasnovski/mini.ai",
-  --   version = "*",
-  --   config = function()
-  --     require("mini.ai").setup()
-  --   end,
-  --   event = "VeryLazy",
-  -- },
+  {
+    "echasnovski/mini.ai",
+    version = "*",
+    -- config = function()
+    --   require("mini.ai").setup()
+    -- end,
+    event = "VeryLazy",
+  },
   {
     "luckasRanarison/tailwind-tools.nvim",
     event = "VeryLazy",
@@ -290,5 +291,9 @@ return {
   {
     "indent-blankline.nvim",
     enabled = false,
+  },
+  {
+    "skywind3000/asyncrun.vim",
+    event = "VeryLazy",
   },
 }

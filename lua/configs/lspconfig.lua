@@ -1,15 +1,18 @@
 -- EXAMPLE
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
+-- local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- This line disables snippets. Note that disabling snippets has side-effects like not including parens on autocomplete.
+capabilities.textDocument.completion.completionItem.snippetSupport = false
 local servers = {
   "html",
-  "cssls",
+  -- "cssls",
   "intelephense",
   "ts_ls",
-  "htmx",
+  -- "htmx",
   "gopls",
   "pyright",
   "rust_analyzer",
@@ -93,14 +96,14 @@ lspconfig.gopls.setup {
 }
 
 -- typescript
-lspconfig.htmx.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  servers = {
-    ["htmx"] = { "typescriptreact" },
-  },
-}
+-- lspconfig.htmx.setup {
+--   on_attach = on_attach,
+--   on_init = on_init,
+--   capabilities = capabilities,
+--   servers = {
+--     ["htmx"] = { "typescriptreact" },
+--   },
+-- }
 
 -- lspconfig.gopls.setup({
 --  on_attach = {function(client, bufnr)
@@ -129,16 +132,39 @@ lspconfig.asm_lsp.setup {
   root_dir = lspconfig.util.root_pattern "./",
 }
 
-lspconfig.clangd.setup {
+lspconfig.intelephense.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
-  init_options = {
-    fallbackFlags = {
-      -- "-I/opt/devkitpro/libctru/include",
-      -- "-I/home/happy/newlib/newlib/libc/include/sys",
-      -- "-I/home/happy/newlib/include",
-      -- "-I/usr/include"
-    },
-  },
+  root_dir = lspconfig.util.root_pattern "/home/happy/jona/products_php/",
+}
+
+local clang_cap = vim.lsp.protocol.make_client_capabilities()
+
+lspconfig.clangd.setup {
+  capabilities = clang_cap,
+  on_attach = function(client, bufnr)
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+
+    client.server_capabilities.completionProvider = nil
+
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      "n",
+      "<leader>f",
+      "<cmd>lua vim.lsp.buf.format()<CR>",
+      { noremap = true, silent = true }
+    )
+
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      "n",
+      "gd",
+      "<cmd>lua vim.lsp.buf.definition()<CR>",
+      { noremap = true, silent = true }
+    )
+
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.definitionProvider = true
+  end,
 }

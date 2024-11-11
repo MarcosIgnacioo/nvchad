@@ -244,6 +244,7 @@ return {
         "~/farhampton/gamedev/*",
         "~/farhampton/marcig/*",
         "~/farhampton/marcig/*/*",
+        "~/farhampton/marcig/cs_101/*/*",
         "~/farhampton/gamedev/oogabooga/",
       },
     },

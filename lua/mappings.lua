@@ -133,9 +133,10 @@ map("n", "<F4>", '"3p', { noremap = true, silent = true })
 map("n", "<F5>", '"4p', { noremap = true, silent = true })
 
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
-map("n", "<F6>", ":copen<CR>:KittyNavigateUp<CR>", { noremap = true, silent = true })
-map("n", "<F7>", ":cclose<CR>", { noremap = true, silent = true })
-map("n", "<F8>", ":AsyncRun make<CR>", { noremap = true, silent = true })
+map("n", "<CR>", ":copen<CR>:KittyNavigateUp<CR>", { noremap = true, silent = true })
+map("n", "<C-Space>", ":AsyncRun make<CR>", { noremap = true, silent = true })
+map("n", "<Esc>", ":cclose<CR>", { noremap = true, silent = true })
+map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
 -- map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
 -- map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
@@ -284,7 +285,7 @@ vim.api.nvim_set_keymap("n", "<Leader>kk", ":BookmarkMoveUp<CR>", {})
 vim.api.nvim_set_keymap("n", "<Leader>jj", ":BookmarkMoveDown<CR>", {})
 vim.api.nvim_set_keymap("n", "<Leader>g", ":BookmarkMoveToLine<CR>", {})
 
-map("n", "<BS>", ":f<CR>", { desc = "" })
+-- map("n", "", ":f<CR>", { desc = "" })
 
 -- vim.keymap.set("n", "<Tab>", function()
 --   require("nvchad.tabufline").prev()
@@ -308,3 +309,4 @@ map("n", "<leader>p", ":HopPaste<CR>")
 map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
 map("n", "<leader>i", "<cmd>Portal jumplist forward<cr>")
 map("n", "<leader>p", "<cmd>Telescope neovim-project history<cr>")
+map("v", "S", ":s/", { noremap = true, silent = true })

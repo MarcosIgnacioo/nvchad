@@ -130,13 +130,14 @@ map("n", "<F1>", '"0p', { noremap = true, silent = true })
 map("n", "<F2>", '"1p', { noremap = true, silent = true })
 map("n", "<F3>", '"2p', { noremap = true, silent = true })
 map("n", "<F4>", '"3p', { noremap = true, silent = true })
-map("n", "<F5>", '"4p', { noremap = true, silent = true })
 
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
 map("n", "<CR>", ":copen<CR>:KittyNavigateUp<CR>", { noremap = true, silent = true })
 map("n", "<C-Space>", ":AsyncRun make<CR>", { noremap = true, silent = true })
 map("n", "<Esc>", ":cclose<CR>", { noremap = true, silent = true })
 map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
+map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
+
 -- map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
 -- map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
 -- TODO: Hacer que intente correr el main.go y si no lo encuentra correr el archivo actual
@@ -147,7 +148,12 @@ map("n", "<F1>", '"0p', { noremap = true, silent = true })
 map("n", "<F2>", '"1p', { noremap = true, silent = true })
 map("n", "<F3>", '"2p', { noremap = true, silent = true })
 map("n", "<F4>", '"3p', { noremap = true, silent = true })
-map("n", "<F5>", '"4p', { noremap = true, silent = true })
+
+map("n", "<F6>", 'vi{:s/"\\(.*\\)":/\\1:<CR> ', { noremap = true, silent = true })
+
+map("n", "<F7>", 'vi{:s/"\\(.*\\)"/string<CR>', { noremap = true, silent = true })
+
+map("n", "<F8>", "vi{:s/\\d\\+/number/g<CR> ", { noremap = true, silent = true })
 
 -- Manera gamer de hacer las marcas globales
 -- local low = function(i) return string.char(97 + i) end
@@ -310,3 +316,10 @@ map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
 map("n", "<leader>i", "<cmd>Portal jumplist forward<cr>")
 map("n", "<leader>p", "<cmd>Telescope neovim-project history<cr>")
 map("v", "S", ":s/", { noremap = true, silent = true })
+
+map(
+  "n",
+  "<F5>",
+  ':BookmarkToggle<CR>vi{:s/"\\(.*\\)":/\\1:<CR>:BookmarkNext<CR>vi{:s/"\\(.*\\)"/string<CR>:BookmarkNext<CR>vi{:s/\\d\\+/number<CR>:BookmarkNext<CR>vi{:s/null/string[] | null<CR>:BookmarkNext<CR>:BookmarkToggle<CR>',
+  { noremap = true, silent = true }
+)

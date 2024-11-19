@@ -134,7 +134,7 @@ map("n", "<F4>", '"3p', { noremap = true, silent = true })
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
 map("n", "<CR>", ":copen<CR>:KittyNavigateUp<CR>", { noremap = true, silent = true })
 map("n", "<C-Space>", ":AsyncRun make<CR>", { noremap = true, silent = true })
-map("n", "<Esc>", ":cclose<CR>", { noremap = true, silent = true })
+map("n", "Q", ":cclose<CR>", { noremap = true, silent = true })
 map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
 map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
 

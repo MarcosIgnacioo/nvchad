@@ -1,7 +1,6 @@
 require "nvchad.options"
 
 -- add yours here!
-
 local o = vim.o
 -- vim.opt.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 o.wrap = true
@@ -15,39 +14,39 @@ o.softtabstop = 2
 o.incsearch = false
 o.breakindent = true
 -- o.cursorlineopt = 'both' -- to enable cursorline!
-o.inccommand = "split";
+o.inccommand = "split"
 
-local cmp = require("cmp")
-cmp.setup({
+local cmp = require "cmp"
+cmp.setup {
   mapping = {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         local entry = cmp.get_selected_entry()
         if not entry then
-          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
         end
         cmp.confirm()
       else
         fallback()
       end
-    end, { "i", "s", "c", }),
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
-  }
-})
+    end, { "i", "s", "c" }),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+  },
+}
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
   desc = "TS_add_missing_imports",
   pattern = { "*.ts", "*.tsx", ".js", ".jsx" },
   callback = function()
-    vim.lsp.buf.code_action({
+    vim.lsp.buf.code_action {
       apply = true,
       context = {
         only = { "source.addMissingImports.ts" },
       },
-    })
-    vim.cmd("write")
+    }
+    vim.cmd "write"
   end,
 })
 
@@ -57,13 +56,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- })
 
 vim.o.laststatus = 3
-require('nvim-tree').setup({
+require("nvim-tree").setup {
   actions = {
     open_file = {
       quit_on_open = true,
     },
   },
-})
+}
 
 require("cmp").setup.filetype("markdown", {
   enabled = false,
@@ -77,11 +76,11 @@ require("cmp").setup.filetype("md", {
 vim.opt.laststatus = 0
 
 -- Configuración para vincular StatusLine y StatusLineNC al grupo de resaltado Normal
-vim.cmd('hi! link StatusLine Normal')
-vim.cmd('hi! link StatusLineNC Normal')
+vim.cmd "hi! link StatusLine Normal"
+vim.cmd "hi! link StatusLineNC Normal"
 
 -- Configuración para establecer la línea de estado como una línea de guiones
-vim.opt.statusline = '%{repeat(\'─\',winwidth(\'.\'))}'
+vim.opt.statusline = "%{repeat('─',winwidth('.'))}"
 -- Run gofmt + goimports on save
 
 -- local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
@@ -93,11 +92,6 @@ vim.opt.statusline = '%{repeat(\'─\',winwidth(\'.\'))}'
 --   group = format_sync_grp,
 -- })
 
-vim.g.neovide_transparency = 0.95
-vim.g.neovide_cursor_trail_size = 0
-vim.g.neovide_cursor_animation_length = 0.05
-vim.g.neovide_position_animation_length = 0.05
-vim.g.neovide_scroll_animation_length = 0.05
 vim.opt.termguicolors = true
 vim.cmd [[
   highlight Normal guibg=none
@@ -105,3 +99,4 @@ vim.cmd [[
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
 ]]
+vim.g.rustfmt_autosave = 1

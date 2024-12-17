@@ -5,7 +5,7 @@ require "nvchad.mappings"
 -- add yours here
 -- j
 
--- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+-- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])jk
 -- vim.cmd([[au FocusLost * :wa]])
 -- aaa
 local map = vim.keymap.set
@@ -13,6 +13,7 @@ local wtf = vim.keymap.del
 wtf("n", "<leader>wk")
 wtf("n", "<tab>")
 wtf("n", "<S-tab>")
+-- wtf("n", "ma")
 map("i", "<Esc>", "<Esc>", { desc = "" })
 map("n", "W", "viW", { desc = "" })
 map("n", "H", ":lua vim.lsp.buf.hover()<CR>", { desc = "" })
@@ -132,11 +133,9 @@ map("n", "<F3>", '"2p', { noremap = true, silent = true })
 map("n", "<F4>", '"3p', { noremap = true, silent = true })
 
 -- Mapeos para funcionalidades específicas asignadas a teclas de función
-map("n", "<CR>", ":copen<CR>:KittyNavigateUp<CR>", { noremap = true, silent = true })
+-- map("n", "<CR>", ":copen<CR>:KittyNavigateUp<CR>", { noremap = true, silent = true })
 map("n", "<C-Space>", ":AsyncRun make<CR>", { noremap = true, silent = true })
-map("n", "Q", ":cclose<CR>", { noremap = true, silent = true })
-map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
-map("n", "<BS>", ":AsyncStop<CR>", { noremap = true, silent = true })
+map("n", "<BS>", ":q<CR>", { noremap = true, silent = true })
 
 -- map('n', '<leader>o', ':w<CR>:term gcc % && ./a.out <CR>', { noremap = true, silent = true })
 -- map('n', '<leader>o', 'ci{<CR><Esc>ko', { noremap = true })
@@ -268,11 +267,7 @@ map("v", "4", "$h", { desc = "Save all and quit" })
 map("v", ";", "$", { desc = "Save all and quit" })
 map("n", ";", "$", { desc = "Save all and quit" })
 map("n", "<C-\\'>", 'f"ci"')
-map("t", "KJ", "<C-\\><C-n>")
-map("t", "C-h", "<Esc>:KittyNavigateLeft<cr>", { silent = true })
-map("t", "C-j", "<Esc>:KittyNavigateDown<cr>", { silent = true })
-map("t", "C-k", "<Esc>:KittyNavigateUp<cr>", { silent = true })
-map("t", "C-l", "<Esc>:KittyNavigateRight<cr>", { silent = true })
+map("t", "kj", "<C-\\><C-n>")
 map("n", "<leader>th", ":Telescope themes", { desc = "telescope nvchad themes" })
 map("n", "<leader>r", ":bd|b#<cr><C-^>", { noremap = true, silent = true })
 -- vim.cmd([[au! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
@@ -323,3 +318,10 @@ map(
   ':BookmarkToggle<CR>vi{:s/"\\(.*\\)":/\\1:<CR>:BookmarkNext<CR>vi{:s/"\\(.*\\)"/string<CR>:BookmarkNext<CR>vi{:s/\\d\\+/number<CR>:BookmarkNext<CR>vi{:s/null/string[] | null<CR>:BookmarkNext<CR>:BookmarkToggle<CR>',
   { noremap = true, silent = true }
 )
+map("n", "<CR>", "_", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("t", "<C-h>", [[<C-\><C-n>:KittyNavigateLeft<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<C-j>", [[<C-\><C-n>:KittyNavigateDown<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<C-k>", [[<C-\><C-n>:KittyNavigateUp<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<C-l>", [[<C-\><C-n>:KittyNavigateRight<CR>]], { noremap = true, silent = true })
+map("n", "ma", "<Esc>") --XD

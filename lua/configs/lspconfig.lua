@@ -15,7 +15,7 @@ local servers = {
   -- "htmx",
   "gopls",
   "pyright",
-  "rust_analyzer",
+  -- "rust_analyzer",
   "zls",
   "asm_lsp",
   "marksman",
@@ -167,4 +167,21 @@ lspconfig.clangd.setup {
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.definitionProvider = true
   end,
+}
+
+lspconfig.rust_analyzer.setup {
+  capabilities = clang_cap,
+  on_attach = function(client, bufnr)
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+    client.server_capabilities.completionProvider = nil
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.definitionProvider = true
+  end,
+  settings = {
+    ["rust-analyzer"] = {
+      diagnostics = {
+        enable = false, -- Turn off diagnostics at the server level
+      },
+    },
+  },
 }

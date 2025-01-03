@@ -246,6 +246,7 @@ require("telescope").setup {
     },
   },
 }
+
 -- por si quiero hacer que pueda pasarme a otra ventana estando centrado en una sola ventana
 -- map("n", "<leader>o", ":ZoomWinTabToggle<CR>", { desc = "" })
 map("n", "C-h", ":ZenMode<CR>", { silent = true })
